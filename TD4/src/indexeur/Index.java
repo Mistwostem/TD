@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ * Interface exposant les fonctionnalités disponibles
  * @author julien et Elie
  *
  * @param <K> Comparable K

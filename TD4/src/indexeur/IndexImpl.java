@@ -8,7 +8,7 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 /**
- * 
+ * CLasse concrète implémentant l'interface Index
  * @author julien et Elie
  *
  * @param <K> Comparable K
