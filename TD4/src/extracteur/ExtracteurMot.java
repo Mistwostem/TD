@@ -6,7 +6,7 @@ package extracteur;
  * @author Julien
  *
  */
-public class ExtracteurMot implements Extracteur {
+public class ExtracteurMot extends ExtracteurAbstract {
 	
     private final String chaine;
     private int ligne;
@@ -56,7 +56,7 @@ public class ExtracteurMot implements Extracteur {
             }
             return new InfosMot(sb.toString(), this.ligne, this.colonne - cptColonne);
         } else {
-            return new InfosMot();
+            return null;
         }
     }   
 

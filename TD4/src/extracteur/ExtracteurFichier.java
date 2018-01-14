@@ -10,7 +10,7 @@ import java.io.IOException;
  * @author Julien
  *
  */
-public class ExtracteurFichier implements Extracteur {
+public class ExtracteurFichier extends ExtracteurAbstract {
 
     private final FileInputStream fichier;
     private int ligne;
@@ -37,7 +37,7 @@ public class ExtracteurFichier implements Extracteur {
         int cursor = 0;
         try {
             while ((cursor = this.fichier.read()) != -1 && Character.isLetterOrDigit((char) cursor)) {
-                //On insère le caractère dans la chaine
+                //On insère le caractère dans àla chaine
                 sb.append((char) cursor);
                 this.colonne++;
             }
@@ -59,7 +59,7 @@ public class ExtracteurFichier implements Extracteur {
         } catch (IOException e) {
             e.getMessage();
         }
-        return new InfosMot();
+        return null;
     }
 
 
