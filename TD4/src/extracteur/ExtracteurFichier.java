@@ -5,12 +5,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
- * Classe concrète héritant de la classe abstraite ExtracteurAbstract 
+ * Classe concrète héritant de l'interface Extracteur 
  * @author Elie
  * @author Julien
  *
  */
-public class ExtracteurFichier extends ExtracteurAbstract {
+public class ExtracteurFichier implements Extracteur {
 
     private final FileInputStream fichier;
     private int ligne;
@@ -18,8 +18,8 @@ public class ExtracteurFichier extends ExtracteurAbstract {
 
     /**
      * Constructeur de la classe ExtracteurFichier prenant en paramètre un fichier de type FileInputStream
-     * @param fichier
-     * @throws FileNotFoundException
+     * @param fichier FileInputStream
+     * @throws FileNotFoundException Fichier introuvable 
      */
     public ExtracteurFichier(FileInputStream fichier) throws FileNotFoundException {
         this.fichier = fichier;

@@ -14,9 +14,9 @@ public class InfosMot {
 
     /**
      * Constructeur de la classe InfosMot prenant en paramètre un mot, un numéro de ligne et un numéro de colonne
-     * @param mot
-     * @param ligne
-     * @param colonne
+     * @param mot String
+     * @param ligne int
+     * @param colonne int
      */
     public InfosMot(String mot, int ligne, int colonne) {
         this.mot = mot;

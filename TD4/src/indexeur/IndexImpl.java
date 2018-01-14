@@ -33,7 +33,7 @@ public class IndexImpl<K extends Comparable<K>, V extends Comparable<V>> impleme
     /**
      * Fonction qui supprime une clé de l'index ainsi que ces valeurs associées
      * 
-     * @param une clé K à supprimer de l'index
+     * @param cle K
      */
 	public void supprimer(K cle) {
 		this.sortedMap.remove(cle);
@@ -42,8 +42,8 @@ public class IndexImpl<K extends Comparable<K>, V extends Comparable<V>> impleme
 	/**
 	 * Fonction qui supprime une valeur de l'index et qui supprime la clé si c'est la dernière valeur de la clé
      *
-     * @param une cle K de l'index
-     * @param une valeur V à supprimer de l'index
+     * @param cle K
+     * @param valeur V
 	 */
     public void supprimer(K cle, V valeur) {
     	this.sortedMap.get(cle).remove(valeur);
@@ -55,8 +55,8 @@ public class IndexImpl<K extends Comparable<K>, V extends Comparable<V>> impleme
     /**
      * Fonction qui ajoute clé et une valeur à l'index, si la clé existe déjà, ajoute la valeur à la clé existante
      *
-     * @param une cle K à ajouter à l'index 
-     * @param valeur une valeur à ajouter à l'index
+     * @param cle K
+     * @param valeur V
      */
     public void ajouter(K cle, V valeur) {
     	 if (this.sortedMap.containsKey(cle)) {
@@ -70,8 +70,8 @@ public class IndexImpl<K extends Comparable<K>, V extends Comparable<V>> impleme
     /**
      * Fonction qui retourne les valeurs d'une clé K prise en entrée
      *
-     * @param une cle K de l'index
-     * @return une Liste de valeurs
+     * @param cle K
+     * @return List
      */
     public List<V> rechercher(K cle) {
     	return this.sortedMap.get(cle); 
@@ -80,9 +80,9 @@ public class IndexImpl<K extends Comparable<K>, V extends Comparable<V>> impleme
     /**
      * Fonction qui vérifie si une clé contient bien la valeur passée en entrée
      *
-     * @param une cle k de l'index
-     * @param une valeur V à chercher dans l'index 
-     * @return une valeur booléenne qui prend vrai si l'index contient le couple donné en entrée
+     * @param cle K
+     * @param valeur V 
+     * @return boolean
      */
     public boolean rechercher(K cle, V valeur) {
     	List<V> listeV = this.rechercher(cle);
@@ -92,7 +92,7 @@ public class IndexImpl<K extends Comparable<K>, V extends Comparable<V>> impleme
     /**
      * Fonction qui retourne le nombre de lcés dans l'index
      * 
-     * @return la taille de l'index
+     * @return int
      */
     public int nbeCles() {
     	return this.sortedMap.size();
@@ -101,7 +101,7 @@ public class IndexImpl<K extends Comparable<K>, V extends Comparable<V>> impleme
     /**
      * Fonction qui vérifie si l'index est vide ou non
      *
-     * @return une variable booléenne indiquant vrai si l'index et vide et faux sinon
+     * @return boolean
      */
     public boolean estVide() {
     	return this.sortedMap.isEmpty(); 
@@ -117,7 +117,7 @@ public class IndexImpl<K extends Comparable<K>, V extends Comparable<V>> impleme
     /**
      * Fonction qui retourne l'ensemble des clés présentes dans l'index
      *
-     * @return les différentes les clés de l'index
+     * @return Set
      */
     public Set<K> obtenirCles() {
     	return this.sortedMap.keySet();
@@ -126,7 +126,7 @@ public class IndexImpl<K extends Comparable<K>, V extends Comparable<V>> impleme
     /**
      * Fonction qui retourne une chaine de caractères contenant les informations présentes dans l'index
      *
-     * @return une chaîne de caractères
+     * @return String
      */
     public String toString(){
     	StringBuilder sb = new StringBuilder();

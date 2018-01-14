@@ -1,12 +1,12 @@
 package extracteur;
 
 /**
- * Classe concrète héritant de la classe abstraite ExtracteurAbstract
+ * Classe concrète héritant l'interface Extracteur
  * @author Elie
  * @author Julien
  *
  */
-public class ExtracteurMot extends ExtracteurAbstract {
+public class ExtracteurMot implements Extracteur {
 	
     private final String chaine;
     private int ligne;
@@ -15,7 +15,7 @@ public class ExtracteurMot extends ExtracteurAbstract {
 
     /**
      * Constructeur de la classe ExtracteurMot prenant en paramètre une chaîne de caractères
-     * @param chaine
+     * @param chaine String
      */
     public ExtracteurMot(String chaine) {
         this.chaine = chaine;
