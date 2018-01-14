@@ -13,13 +13,13 @@ public class Main {
 
             // CLASSE MAIN
 			
-            System.out.println("\nCLASSE MAIN - INDEXATION PUIS CREATION DES INDEXES\n");
+            System.out.println("\nCLASSE MAIN - INDEXATION PUIS CREATION DES INDEX\n");
             
             //Déclaration des chaînes (qui seront indéxées par la suite)
     
             String chaine3 = "Incroyable " + '\r' + " on dirait \t de \n\n la \n\42MAGIE! ";
             String chaine4 = "Un tout petit chien, joli \n ronge un  joli petit os ;\nTout ce qui est petit est joli.";
-            String chaine5 = chaine3 + chaine4;
+            //String chaine5 = chaine3 + chaine4;
 
             //Déclaration des fichiers à extraire puis indexer
             

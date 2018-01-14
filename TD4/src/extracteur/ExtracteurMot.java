@@ -1,5 +1,11 @@
 package extracteur;
 
+/**
+ * Classe concrète héritant de la classe abstraite ExtracteurAbstract
+ * @author Elie
+ * @author Julien
+ *
+ */
 public class ExtracteurMot implements Extracteur {
 	
     private final String chaine;
@@ -7,6 +13,10 @@ public class ExtracteurMot implements Extracteur {
     private int colonne;
     private int cursor;
 
+    /**
+     * Constructeur de la classe ExtracteurMot prenant en paramètre une chaîne de caractères
+     * @param chaine
+     */
     public ExtracteurMot(String chaine) {
         this.chaine = chaine;
         this.cursor = 0;
@@ -14,6 +24,9 @@ public class ExtracteurMot implements Extracteur {
         this.colonne = 0;
     }
 
+    /**
+     * Retourne un objet de type InfosMot
+     */
     @Override
     public InfosMot getNext() {
         StringBuilder sb = new StringBuilder();
@@ -43,7 +56,7 @@ public class ExtracteurMot implements Extracteur {
             }
             return new InfosMot(sb.toString(), this.ligne, this.colonne - cptColonne);
         } else {
-            return null;
+            return new InfosMot();
         }
     }   
 

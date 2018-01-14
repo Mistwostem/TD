@@ -4,18 +4,32 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/**
+ * Classe concrète héritant de la classe abstraite ExtracteurAbstract 
+ * @author Elie
+ * @author Julien
+ *
+ */
 public class ExtracteurFichier implements Extracteur {
 
     private final FileInputStream fichier;
     private int ligne;
     private int colonne;
 
+    /**
+     * Constructeur de la classe ExtracteurFichier prenant en paramètre un fichier de type FileInputStream
+     * @param fichier
+     * @throws FileNotFoundException
+     */
     public ExtracteurFichier(FileInputStream fichier) throws FileNotFoundException {
         this.fichier = fichier;
         this.ligne = 1;
         this.colonne = 0;
     }
 
+    /**
+     * Retourne un objet de type InfosMot
+     */
     @Override
     public InfosMot getNext() {
         StringBuilder sb = new StringBuilder();
@@ -23,13 +37,12 @@ public class ExtracteurFichier implements Extracteur {
         int cursor = 0;
         try {
             while ((cursor = this.fichier.read()) != -1 && Character.isLetterOrDigit((char) cursor)) {
-                //on insère le caractère dans la chaine
+                //On insère le caractère dans la chaine
                 sb.append((char) cursor);
                 this.colonne++;
             }
             switch ((char) cursor) {
                 case '\n':
-                    //  System.out.println("HERE");
                     this.ligne++;
                     this.colonne = 0;
                     break;
@@ -46,7 +59,7 @@ public class ExtracteurFichier implements Extracteur {
         } catch (IOException e) {
             e.getMessage();
         }
-        return null;
+        return new InfosMot();
     }
 
 
