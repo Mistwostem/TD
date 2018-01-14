@@ -7,35 +7,44 @@ import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+/**
+ * 
+ * @author julien et Elie
+ *
+ * @param <K> Comparable K
+ * @param <V> Comparable V
+ */
 public class IndexImpl<K extends Comparable<K>, V extends Comparable<V>> implements Index<K,V> {
 
 	/**
-    * SortedMap pour stocker les clés et les valeurs de l'index
+    * Fonction SortedMap qui va stocker les clés et les valeurs contenues dans l'index
+    * 
+    * @return un objet de type SortedMap 
     */
     private final SortedMap<K, List<V>> sortedMap;
     
     /**
-     * Constructeur vide, par défaut implémentation de la SortedMap avec une
-     * TreeMap
+     * Constructeur de la classe IndexImpl, on implémente SortedMap avec TreeMap
      */
     public IndexImpl() {
         this.sortedMap = new TreeMap<>(Collator.getInstance());
     }
-
-    /**
-     * Constructeur prenant en paramètre une SortedMap : implémentation laissée
-     * au choix de l'utilisateur.
-     *
-     * @param m SortedMap
-     */
-    public IndexImpl(SortedMap m) {
-        this.sortedMap = m;
-    }
 	
+    /**
+     * Fonction qui supprime une clé de l'index ainsi que ces valeurs associées
+     * 
+     * @param une clé K à supprimer de l'index
+     */
 	public void supprimer(K cle) {
 		this.sortedMap.remove(cle);
     }
 
+	/**
+	 * Fonction qui supprime une valeur de l'index et qui supprime la clé si c'est la dernière valeur de la clé
+     *
+     * @param une cle K de l'index
+     * @param une valeur V à supprimer de l'index
+	 */
     public void supprimer(K cle, V valeur) {
     	this.sortedMap.get(cle).remove(valeur);
         if (this.sortedMap.get(cle).isEmpty()) {
@@ -43,6 +52,12 @@ public class IndexImpl<K extends Comparable<K>, V extends Comparable<V>> impleme
         }
     }
 
+    /**
+     * Fonction qui ajoute clé et une valeur à l'index, si la clé existe déjà, ajoute la valeur à la clé existante
+     *
+     * @param une cle K à ajouter à l'index 
+     * @param valeur une valeur à ajouter à l'index
+     */
     public void ajouter(K cle, V valeur) {
     	 if (this.sortedMap.containsKey(cle)) {
              this.sortedMap.get(cle).add(valeur);
@@ -52,31 +67,67 @@ public class IndexImpl<K extends Comparable<K>, V extends Comparable<V>> impleme
          } 
     }
 
+    /**
+     * Fonction qui retourne les valeurs d'une clé K prise en entrée
+     *
+     * @param une cle K de l'index
+     * @return une Liste de valeurs
+     */
     public List<V> rechercher(K cle) {
     	return this.sortedMap.get(cle); 
     }
 
+    /**
+     * Fonction qui vérifie si une clé contient bien la valeur passée en entrée
+     *
+     * @param une cle k de l'index
+     * @param une valeur V à chercher dans l'index 
+     * @return une valeur booléenne qui prend vrai si l'index contient le couple donné en entrée
+     */
     public boolean rechercher(K cle, V valeur) {
     	List<V> listeV = this.rechercher(cle);
         return listeV.contains(valeur); 
     }
 
+    /**
+     * Fonction qui retourne le nombre de lcés dans l'index
+     * 
+     * @return la taille de l'index
+     */
     public int nbeCles() {
     	return this.sortedMap.size();
     }
 
+    /**
+     * Fonction qui vérifie si l'index est vide ou non
+     *
+     * @return une variable booléenne indiquant vrai si l'index et vide et faux sinon
+     */
     public boolean estVide() {
     	return this.sortedMap.isEmpty(); 
     }
 
+    /**
+     * Fonction qui vide l'index
+     */
     public void vider() {
     	this.sortedMap.clear(); 
     }
 
+    /**
+     * Fonction qui retourne l'ensemble des clés présentes dans l'index
+     *
+     * @return les différentes les clés de l'index
+     */
     public Set<K> obtenirCles() {
     	return this.sortedMap.keySet();
     }
     
+    /**
+     * Fonction qui retourne une chaine de caractères contenant les informations présentes dans l'index
+     *
+     * @return une chaîne de caractères
+     */
     public String toString(){
     	StringBuilder sb = new StringBuilder();
         for (K key : this.obtenirCles()) {

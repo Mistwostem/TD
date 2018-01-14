@@ -13,13 +13,12 @@ public class Main {
 
             // CLASSE MAIN
 			
-            System.out.println("\nCLASSE MAIN - INDEXATION PUIS CREATION DES INDEX\n");
+            System.out.println("\nCLASSE MAIN - INDEXATION PUIS CREATION DES INDEXES\n");
             
             //Déclaration des chaînes (qui seront indéxées par la suite)
     
-            String chaine3 = "Incroyable " + '\r' + " on dirait \t de \n\n la \n\42MAGIE! ";
+            String chaine3 = "Ceci est un test d'un test\n comprenant un test.";
             String chaine4 = "Un tout petit chien, joli \n ronge un  joli petit os ;\nTout ce qui est petit est joli.";
-            //String chaine5 = chaine3 + chaine4;
 
             //Déclaration des fichiers à extraire puis indexer
             
@@ -28,25 +27,23 @@ public class Main {
 
             //Déclaration des extracteurs et des index
             
-            IndexImpl<String, Integer> indexS = new IndexImpl<>();
-            Extracteur ex = new ExtracteurMot(chaine3);
-            // Extracteur ex2 = new ExtracteurString(chaine2);  
+            IndexImpl<String, Integer> indexString = new IndexImpl<>();
+            Extracteur ex = new ExtracteurMot(chaine3); 
 
-            IndexImpl<String, Integer> indexF = new IndexImpl<>();
+            IndexImpl<String, Integer> indexFichier = new IndexImpl<>();
             Extracteur eF = new ExtracteurFichier(file);
 
-            //TEST DE L'EXTRACTEUR FILE ET DE L'INDEXATION
-            //Méthode du processus extraction file -> indexation
+            //TEST DE L'EXTRACTEUR FICHIER ET DE SON INDEXATION
+            //Process extraction fichier vers indexation
             
-            System.out.println("Extraction puis indexation à partir d'un fichier : \n");
-            EI(eF, indexF);
+            System.out.println("Extraction suivi de l'indexation à partir du fichier : \n");
+            ExtractIdex(eF, indexFichier);
 
-            //TEST DE L'EXTRACTEUR STRING ET DE L'INDEXATION
-            //Méthode du processus extraction string -> indexation
+            //TEST DE L'EXTRACTEUR DE MOT ET DE SON INDEXATION
+            //Process extraction mot vers indexation
             
-            System.out.println("Extraction puis indexation à partir d'une chaine de caractères :  \n");
-            EI(ex, indexS);
-            //  EI(ex2, new IndexImpl<>());
+            System.out.println("Extraction suivi de l'indexation à partir d'une chaine de caractères :  \n");
+            ExtractIdex(ex, indexString);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -54,7 +51,13 @@ public class Main {
 
     }
 
-    public static void EI(Extracteur extracteur, IndexImpl index) {
+	/**
+	 * Fonction simulant le processus d'extraction puis d'indexation
+	 * 
+	 * @param extracteur qui correspond à une instance d'extracteur
+	 * @param index qui correspond à une instance d'indexImpl
+	 */
+    public static void ExtractIdex(Extracteur extracteur, IndexImpl<String, Integer> index) {
         InfosMot infoMot = new InfosMot();
         do {
             infoMot = extracteur.getNext();
