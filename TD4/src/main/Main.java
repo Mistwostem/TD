@@ -2,44 +2,68 @@ package main;
 
 import extracteur.*;
 import indexeur.*;
-import java.text.Collator;
-import java.util.SortedMap;
-import java.util.TreeMap;
+
+import java.io.FileInputStream;
 
 public class Main {
 
 	public static void main(String[] args){
 		
-	    Extracteur eF = new ExtracteurFile();
-	    Extracteur eS = new ExtracteurMot();  
-	    
-	  //Test de la classe IndexImpl seule
-        System.out.println("TESTS DE LA CLASSE INDEXATION SEULE\n");
+		try {
 
-        SortedMap m = new TreeMap<>(Collator.getInstance());
+            // CLASSE MAIN
+			
+            System.out.println("\nCLASSE MAIN - INDEXATION PUIS CREATION DES INDEXES\n");
+            
+            //Déclaration des chaînes (qui seront indéxées par la suite)
+    
+            String chaine3 = "Incroyable " + '\r' + " on dirait \t de \n\n la \n\42MAGIE! ";
+            String chaine4 = "Un tout petit chien, joli \n ronge un  joli petit os ;\nTout ce qui est petit est joli.";
+            String chaine5 = chaine3 + chaine4;
 
-        IndexImpl<String, Integer> i = new IndexImpl<>(m);
-        i.ajouter("Where", 1);
-        i.ajouter("is", 2);
-        i.ajouter("my", 3);
-        i.ajouter("my", 9);
-        i.ajouter("mind", 3);
-        i.ajouter("mind", 4);
-        i.ajouter("?", 2);
+            //Déclaration des fichiers à extraire puis indexer
+            
+            String path = "src/main/monFichier.txt";
+            FileInputStream file = new FileInputStream(path);
 
-        System.out.println("Affichage de l'index :\n" + i.toString());
-        i.supprimer("Where");
-        System.out.println("Après suppresion de la clé Where :\n" + i.toString() + '\n');
-        i.supprimer("mind", 3);
-        System.out.println("Après suppresion de la valeur 3 de la clé mind :\n" + i.toString() + '\n');
-        i.supprimer("mind", 4);
-        System.out.println("Après suppresion de la valeur 4 de la clé mind :\n" + i.toString() + '\n');
-        System.out.println("Recherche des valeurs de la clé my :\n" + i.rechercher("my") + '\n');
-        System.out.println("Vérifier si la valeur 9 existe pour la clé my :\n" + i.rechercher("my", 9) + '\n');
-        System.out.println("Nombre de clés :\n" + i.nbeCles() + '\n');
-        System.out.println("Vérifier si l'index est vide :\n" + i.estVide() + '\n');
-        System.out.println("Obtenir toutes les clés de l'index :\n" + i.obtenirCles() + '\n');
-        i.vider();
-        System.out.println("Affichage de l'index :\n" + i.toString());
+            //Déclaration des extracteurs et des index
+            
+            IndexImpl<String, Integer> indexS = new IndexImpl<>();
+            Extracteur ex = new ExtracteurMot(chaine3);
+            // Extracteur ex2 = new ExtracteurString(chaine2);  
+
+            IndexImpl<String, Integer> indexF = new IndexImpl<>();
+            Extracteur eF = new ExtracteurFichier(file);
+
+            //TEST DE L'EXTRACTEUR FILE ET DE L'INDEXATION
+            //Méthode du processus extraction file -> indexation
+            
+            System.out.println("Extraction puis indexation à partir d'un fichier : \n");
+            EI(eF, indexF);
+
+            //TEST DE L'EXTRACTEUR STRING ET DE L'INDEXATION
+            //Méthode du processus extraction string -> indexation
+            
+            System.out.println("Extraction puis indexation à partir d'une chaine de caractères :  \n");
+            EI(ex, indexS);
+            //  EI(ex2, new IndexImpl<>());
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+    public static void EI(Extracteur extracteur, IndexImpl index) {
+        InfosMot infoMot = new InfosMot();
+        do {
+            infoMot = extracteur.getNext();
+            if (infoMot == null) {
+                break;
+            }
+
+            index.ajouter(infoMot.getMot().toLowerCase(), infoMot.getLigne());
+        } while (null != infoMot.getMot());
+        System.out.println(index.toString());
     }
 }

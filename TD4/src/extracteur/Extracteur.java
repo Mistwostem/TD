@@ -2,5 +2,10 @@ package extracteur;
 
 public interface Extracteur {
 
-	public InfosMot getNext();
+	/**
+     * Renvoie le prochain mot lu par le code
+     *
+     * @return InfosMot
+     */
+    public InfosMot getNext();
 }
