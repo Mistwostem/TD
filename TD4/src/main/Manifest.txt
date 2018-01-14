@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Created-By: Elie & Julien
+Main-Class: main.Main
